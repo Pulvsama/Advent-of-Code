@@ -32,8 +32,8 @@ Benchmarked on randomly generated test cases with guaranteed solutions:
 ![Time Comparison](Time%20graph.png)
 
 **Key Observations:**
-- The brute force O(n²) grows quadratically—clearly visible at larger inputs
 - Hash set method stays nearly flat (linear time)
+- Brute force in O(n²) is growing way faster than set method
 - Three-sum follows expected O(n²) behavior
 
 ## Files
