@@ -1,4 +1,4 @@
-from typing import List, Tuple, Union, Dict
+from typing import List, Union, Dict
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).parent
