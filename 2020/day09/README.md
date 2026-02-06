@@ -37,3 +37,9 @@ Part 2: Find contiguous set summing to 127 (e.g., [15, 25, 47, 40]) → min + ma
 - Recognizing classic algorithmic patterns (two-sum, sliding window) in novel problem contexts
 - Importance of window-based techniques for sequence analysis problems
 - Clean separation of concerns with modular, reusable functions (`find_two_sum`, `part1`, `part2`)
+  
+## Usage
+
+```bash
+python solution.py
+```
