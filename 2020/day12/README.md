@@ -1,31 +1,21 @@
 # Day 12: Rain Risk
 
-## Problem Overview
-Navigate a ship following a sequence of navigation instructions (forward, cardinal directions, rotations) and calculate the Manhattan distance to the destination. The twist: Part 2 changes the rule set, requiring understanding of waypoint rotation mechanics separate from ship movement.
+## Problem Summary
 
-## Approach & Algorithm
+Navigate a ship using instructions for movement (N/S/E/W), rotation (L/R), and forward movement (F). Calculate the Manhattan distance from the starting position after all instructions. Part 2 introduces waypoint-relative navigation.
 
-**Part 1:** Direct navigation with ship-centric rotation
-- Map compass directions to coordinate deltas using a dictionary
-- Track current heading and apply rotation using modular arithmetic (rotation angle ÷ 90°)
-- Use circular list indexing to elegantly handle direction cycling: `'NESW'[index % 4]`
+## Solution
 
-**Part 2:** Waypoint-based navigation (more complex)
-- Introduce waypoint coordinates relative to ship (initially at 10E, 1N)
-- Decouple ship movement from waypoint direction, rotating only the waypoint around the origin
-- Implement 90° rotation using transformation matrices in a loop: `(x, y) → (-y, x)` for right rotation
-- Accumulate final position and calculate Manhattan distance
+### Part 1 - Direct Ship Navigation
+The ship faces a direction and moves according to instructions. Rotations change the ship's facing direction.
 
-## Example
+**Approach:** Track ship position and current facing direction. Use modular arithmetic on `'NESW'` string for rotations, and apply directional deltas for movement.
 
-**Input:**
+### Part 2 - Waypoint Navigation
+Instructions now move a waypoint relative to the ship. `F` moves the ship toward the waypoint, while rotations spin the waypoint around the ship.
+
+**Approach:** Track both ship and waypoint positions. For rotations, apply coordinate transformation: `(x, y) → (-y, x)` for 90° right turns. Multiply waypoint offset by `F` value for ship movement.
+
+```bash
+python solution.py
 ```
-F10   (Forward 10 units)
-N3    (Move North 3)
-F7    (Forward 7 units)
-R90   (Rotate right 90°)
-F11   (Forward 11 units)
-```
-
-**Part 1 Output:** `25` (Manhattan distance after following original rules)  
-**Part 2 Output:** `286` (Different mechanics, same example result)

@@ -1,18 +1,21 @@
-## Day 11: Seating System
+# Day 11: Seating System
 
-This challenge simulates seat occupancy in a ferry waiting area using rule-based updates. The task is to apply the rules until the layout stabilizes and report the number of occupied seats.
+## Problem Summary
 
-### Approach
-- Model the grid as immutable iterations: compute the next layout from the current layout until no cells change.
-- Part 1 uses immediate neighbors; Part 2 uses line-of-sight neighbors in eight directions with a visibility scan.
-- Track occupied counts per iteration and stop on convergence.
+Simulate people choosing seats in a ferry waiting area based on occupancy rules. Apply rules repeatedly until the seating pattern stabilizes, then count occupied seats. Part 1 uses adjacent neighbors; Part 2 uses line-of-sight visibility.
 
-### Techniques Used
-- Efficient neighbor enumeration with precomputed direction vectors.
-- Early exit when a layout pass produces no changes.
-- Clean separation of parsing, stepping, and convergence detection to keep the logic testable.
+## Solution
 
-### Key Takeaways
-- Iterative simulation is easier to reason about with immutable state transitions.
-- Precomputing directional scans simplifies the rule engine and improves performance.
-- Clear separation of concerns makes complex rule sets easier to extend and verify.
+### Part 1 - Adjacent Seat Rules
+People sit if no adjacent seats are occupied and leave if 4+ adjacent seats are occupied. Simulate until stable.
+
+**Approach:** For each iteration, create a new grid by checking the 8 adjacent neighbors of each seat. Stop when no seats change state.
+
+### Part 2 - Line-of-Sight Rules
+People now check the first visible seat in each of 8 directions (not just adjacent). Leave threshold increases to 5+ visible occupied seats.
+
+**Approach:** For each seat, scan outward in 8 directions until hitting a seat (ignoring floor spaces). Apply new rules until convergence.
+
+```bash
+python solution.py
+```
