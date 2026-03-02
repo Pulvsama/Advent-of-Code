@@ -61,8 +61,30 @@ def part1(entries: Tuple[List[str], List[str]]) -> int:
     return sum(bool(regex.match(m)) for m in messages)
 
 def part2(entries: Tuple[List[str], List[str]]) -> int:
-    """"""
+    """Returns the number of messages that matches the rule 0 with the changes"""
+    rules = defaultdict(list)
+    messages = entries[1]
+    for rule in entries[0]:
+        num, matches = rule.split(": ")
+        matches = matches.strip('"')
+        if num == "11":
+            patterns = []
+            for n in range(1, 10):
+                left = " ".join(["42"] * n)
+                right = " ".join(["31"] * n)
+                patterns.append(left + " " + right)
+            matches = " | ".join(patterns)
+        elif num == "8":
+            patterns = []
+            for n in range(1, 15):
+                patterns.append(" ".join(["42"] * n))
+            matches = " | ".join(patterns)
+        rules[int(num)] = [match.split() for match in matches.split(" | ")]
+    regex = build_regex(rules)
+
+    return sum(bool(regex.match(m)) for m in messages)
 
 if __name__ == "__main__":
     entries = load_input(INPUT_FILE)
     print("Answer for part 1:", part1(entries))
+    print("Answer for part 2:", part2(entries))
